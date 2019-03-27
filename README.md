@@ -14,5 +14,8 @@ Most of the charts will be bar charts, with the user having the option to select
 The crime map will be a chloropleth.
 
 ### Visualization
-Chloropleth Map of Crime:
+Bar Charts:  
+![Bar chart](https://github.com/kyletau67/mmtankkl/blob/master/doc/crime.PNG)
+
+Chloropleth Map of Crime:  
 ![Chloropleth Map of Crime](https://github.com/kyletau67/mmtankkl/blob/master/doc/boulder.PNG)
