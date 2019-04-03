@@ -1,5 +1,5 @@
 import copy
-crimes = ['DRUGS/POSSESSION/MARIJUANA','Homicide/Murder-Nonnegligent Manslaughter','DISORDERLY/ VAGRANCY / BEGGING']
+crimes = ['MV THEFT/AUTOMOBILE','MURDER AND NONNEGLIGENT MANSLAUGHTER','DISORDERLY/ VAGRANCY / BEGGING']
 def addMonth():
     with open("data/Raleigh_Police_Incidents_SRS.csv") as file:
         lineRead = file.readline()
@@ -43,7 +43,7 @@ def getInfo():
     d['NORTHEAST'] = nestDict5
     d['DOWNTOWN'] = nestDict6
     print(d)
-    with open("data/withMonth.csv","r") as file:
+    with open("../data/withMonth.csv") as file:
         line = file.readline()
         line = file.readline()
         while line:
@@ -64,9 +64,9 @@ def getInfo():
 # user picks a district
 # and different crimes show up for each month
 # too many crimes to choose from, so made it for three different ones
-# Drugs/Possession/Marijuana, Disorderly/Vagrancy/Begging, Murder & Non-Negligent Murder
+# Car Theft, Disorderly/Vagrancy/Begging, Murder & Non-Negligent Murder
 # will return a dictionary with keys as districts and values as dictionaries
 # the keys of the nested dict will be months, and their values will be a list of #'s
-# if you need to change crimes, chcange the crimes at the start
+# if you need to change crimes, change the crimes at the start
 crimes = getInfo()
 print(crimes)
