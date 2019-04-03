@@ -67,6 +67,6 @@ def getInfo():
 # Drugs/Possession/Marijuana, Disorderly/Vagrancy/Begging, Murder & Non-Negligent Murder
 # will return a dictionary with keys as districts and values as dictionaries
 # the keys of the nested dict will be months, and their values will be a list of #'s
-
+# if you need to change crimes, chcange the crimes at the start
 crimes = getInfo()
 print(crimes)
