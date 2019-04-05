@@ -27,7 +27,7 @@ $ python3 -m venv venv
 $ . venv/bin/activate
 ```
 
-2. Clone the Poppins repository
+2. Clone the mmtankkl repository
 
 ```
 $ git clone https://github.com/kyletau67/mmtankkl.git
