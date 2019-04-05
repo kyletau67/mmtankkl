@@ -33,7 +33,7 @@ $ . venv/bin/activate
 $ git clone https://github.com/kyletau67/mmtankkl.git
 ```
 
-3. Install dependencies in [requirements.txt] (/requirements.txt)
+3. Install dependencies in [requirements.txt](/requirements.txt)
 
 ```
 pip install -r requirements.txt
