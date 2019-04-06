@@ -17,33 +17,23 @@ def addMonth():
 def getInfo():
     districts = ['SOUTHEAST','NORTHWEST','NORTH','SOUTHWEST','NORTHEAST','DOWNTOWN']
     calendar = ["01","02","03","04","05","06","07","08","09","10","11","12"]
-    nestDict1 = dict.fromkeys(calendar)
-    nestDict1['01'] = [0,0,0]
-    nestDict1['02'] = [0,0,0]
-    nestDict1['03'] = [0,0,0]
-    nestDict1['04'] = [0,0,0]
-    nestDict1['05'] = [0,0,0]
-    nestDict1['06'] = [0,0,0]
-    nestDict1['07'] = [0,0,0]
-    nestDict1['08'] = [0,0,0]
-    nestDict1['09'] = [0,0,0]
-    nestDict1['10'] = [0,0,0]
-    nestDict1['11'] = [0,0,0]
-    nestDict1['12'] = [0,0,0]
-    nestDict2 = copy.deepcopy(nestDict1)
-    nestDict3 = copy.deepcopy(nestDict1)
-    nestDict4 = copy.deepcopy(nestDict1)
-    nestDict5 = copy.deepcopy(nestDict1)
-    nestDict6 = copy.deepcopy(nestDict1)
+    nestArr1 = []
+    for x in calendar:
+        nestArr1.append({'month' : x, 'stats': [0,0,0]})
+    nestArr2 = copy.deepcopy(nestArr1)
+    nestArr3 = copy.deepcopy(nestArr1)
+    nestArr4 = copy.deepcopy(nestArr1)
+    nestArr5 = copy.deepcopy(nestArr1)
+    nestArr6 = copy.deepcopy(nestArr1)
     d = dict.fromkeys(districts)
-    d['SOUTHEAST'] = nestDict1
-    d['NORTHWEST'] = nestDict2
-    d['NORTH'] = nestDict3
-    d['SOUTHWEST'] = nestDict4
-    d['NORTHEAST'] = nestDict5
-    d['DOWNTOWN'] = nestDict6
+    d['SOUTHEAST'] = nestArr1
+    d['NORTHWEST'] = nestArr2
+    d['NORTH'] = nestArr3
+    d['SOUTHWEST'] = nestArr4
+    d['NORTHEAST'] = nestArr5
+    d['DOWNTOWN'] = nestArr6
     print(d)
-    with open("../data/withMonth.csv") as file:
+    with open("data/withMonth.csv") as file:
         line = file.readline()
         line = file.readline()
         while line:
@@ -57,7 +47,7 @@ def getInfo():
                 if district in districts:
                     month = last_line[-2]
                     print(district,month,str(ind))
-                    d[district][month][ind] += 1
+                    d[district][int(month) - 1]['stats'][ind] += 1
             line = file.readline()
     return d
 
