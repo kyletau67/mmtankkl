@@ -16,7 +16,7 @@
     .append('div')
     .attr('class', 'checkbox')
     .append('label').html(function(id, index) {
-      var checkbox = '<input id="' + id + '" type="checkbox" class="category">';
+      var checkbox = '<input id="' + id + '" type="checkbox" class="category" checked="checked">';
       return checkbox + crimes[index];
     });
 
@@ -46,8 +46,16 @@
 
   d3.select('#district').on('change', function() {
     district = d3.select('#district').node().value
-    console.log(district);
 
+    checkBoxes();
+  });
+
+  d3.select('.categories').selectAll('.category').on('change', function() {
+    checkBoxes();
+  });
+  renderGraph();
+
+  function checkBoxes(){
     var x = d3.select('.categories').selectAll('.category:checked');
 
     var ids = []
@@ -56,20 +64,8 @@
     });
 
     updateGraph(ids)
-  });
-
-  d3.select('.categories').selectAll('.category').on('change', function() {
-    var x = d3.select('.categories').selectAll('.category:checked');
-
-    var ids = []
-    x.nodes().forEach(function(d){
-        ids.push(d.id);
-    });
-    //console.log(x.nodes()[0].id);
-    //console.log(ids);
-    updateGraph(ids);
-  });
-  renderGraph();
+    updateGraph(ids)
+  }
 
   function renderGraph() {
     x.domain([0, 0]);
@@ -90,7 +86,8 @@
   }
 
   function updateGraph(selectedIds) {
-    console.log(district);
+    //console.log(district);
+
     var monthsData = data[district].map(function(monthData) {
       return {
         month: monthData.month,
@@ -106,8 +103,7 @@
         })
       }
     });
-
-
+    //console.log(monthsData);
 
     x.domain([0, d3.max(monthsData, function(d) { return d3.max(d.ages, function(d) { return d.value }); })]);
 
@@ -121,17 +117,16 @@
     var month = svg.selectAll(".month")
       .data(monthsData);
 
-      console.log(month);
+      //console.log(month);
 
     month.enter().append("g")
       .attr("class", "month")
       .attr("transform", function(d) { return "translate(0, " + y0(d.month) + ")"; });
 
     var age = month.selectAll("rect")
-      .data(function(d) { console.log(d.ages); return d.ages; });
+      .data(function(d) { return d.ages; });
 
 
-    console.log(age);
     age.enter().append("rect")
     .attr("x", 0)
     .attr("y", function(d, index) { return y1(ids[index]); })
@@ -141,7 +136,7 @@
     .transition()
     .attr("width", function(d) { return x(d.value); })
     .attr("height", 10);
-
+//console.log(age);
 
     age
       .attr("x", 0)
@@ -155,28 +150,26 @@
 
     age.exit().transition().attr("width", 0).remove();
 
-/*
+
     var legend = svg.selectAll(".legend")
         .data(monthsData[0].ages.map(function(age) { return age.name; }));
+        console.log(legend);
 
-    legend.enter().append("g");
-    legend
+    legend.enter().append("g")
         .attr("class", "legend")
         .attr("transform", function(d, i) { return "translate(0," + (200 + i * 20) + ")"; });
 
     var legendColor = legend.selectAll('.legend-color').data(function(d) { return [d]; });
-    legendColor.enter().append("rect");
-    legendColor
+    legendColor.enter().append("rect")
       .attr('class', 'legend-color')
       .attr("x", width - 18)
       .attr("width", 18)
       .attr("height", 18)
       .style("fill", color);
 
-    var legendText = legend.selectAll('.legend-text').data(function(d) { return [d]; });;
+    var legendText = legend.selectAll('.legend-text').data(function(d) { console.log(d); return [d]; });
 
-    legendText.enter().append("text");
-    legendText
+    legendText.enter().append("text")
       .attr('class', 'legend-text')
       .attr("x", width - 24)
       .attr("y", 9)
@@ -185,5 +178,8 @@
       .text(function(d) { return d; });
 
     legend.exit().remove();
-*/
+
   }
+
+  checkBoxes();
+  checkBoxes();
