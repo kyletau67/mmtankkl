@@ -50,8 +50,8 @@ function checkBoxes(){
 
 function renderGraph() {
   x.domain([0, 0]);
-
-  y0.domain(data[district].map(function(d) { return d.month; }));
+  console.log(data);
+  y0.domain(data['NORTHEAST'].map(function(d) { return d.month; }));
 
   y1.domain(crimes).rangeRound([0, 20]);
 
@@ -160,6 +160,5 @@ function updateGraph(selectedIds) {
   legend.exit().remove();
 
 }
-
 checkBoxes();
 checkBoxes();
