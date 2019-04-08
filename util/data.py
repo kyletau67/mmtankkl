@@ -1,5 +1,5 @@
 import copy
-
+import random
 def findCrimes():
     tempSet = set()
     with open("../data/withMonth.csv","r") as file:
@@ -11,9 +11,18 @@ def findCrimes():
             tempSet.add(crime)
             lineRead = file.readline()
     return list(tempSet)
-
-
-
+allVal = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+def makeIDs():
+    tempSet = set()
+    while len(tempSet) <= 342:
+        length = random.randint(1,5)
+        s = ""
+        while len(s) < length:
+            s+= random.choice(allVal)
+        tempSet.add(s)
+    return list(tempSet)
+ids = makeIDs()
+print(ids)
 crimes = ['MV THEFT/AUTOMOBILE','MURDER AND NONNEGLIGENT MANSLAUGHTER','DISORDERLY/ VAGRANCY / BEGGING']
 crimes = findCrimes()
 #print(crimes)
