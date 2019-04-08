@@ -1,7 +1,26 @@
 import copy
+
+def findCrimes():
+    tempSet = set()
+    with open("../data/withMonth.csv","r") as file:
+        lineRead = file.readline()
+        lineRead = file.readline()
+        while lineRead:
+            lineReadSplit = lineRead.split(",")
+            crime = lineReadSplit[3]
+            tempSet.add(crime)
+            lineRead = file.readline()
+    return list(tempSet)
+
+
+
 crimes = ['MV THEFT/AUTOMOBILE','MURDER AND NONNEGLIGENT MANSLAUGHTER','DISORDERLY/ VAGRANCY / BEGGING']
+crimes = findCrimes()
+print(crimes)
+with open("../data/crimes.csv","w") as file:
+    file.write(repr(crimes))
 def addMonth():
-    with open("data/Raleigh_Police_Incidents_SRS.csv") as file:
+    with open("../data/Raleigh_Police_Incidents_SRS.csv") as file:
         lineRead = file.readline()
         lineRead = file.readline()
         with open("data/withMonth.csv","w") as writer:
@@ -19,7 +38,7 @@ def getInfo():
     calendar = ["01","02","03","04","05","06","07","08","09","10","11","12"]
     nestArr1 = []
     for x in calendar:
-        nestArr1.append({'month' : x, 'stats': [0,0,0]})
+        nestArr1.append({'month' : x, 'stats': [0] * 342})
     nestArr2 = copy.deepcopy(nestArr1)
     nestArr3 = copy.deepcopy(nestArr1)
     nestArr4 = copy.deepcopy(nestArr1)
@@ -33,21 +52,20 @@ def getInfo():
     d['NORTHEAST'] = nestArr5
     d['DOWNTOWN'] = nestArr6
     print(d)
-    with open("data/withMonth.csv") as file:
+    with open("../data/withMonth.csv") as file:
         line = file.readline()
         line = file.readline()
         while line:
             last_line = line.split(",")
             crime = last_line[3]
-            if crime in crimes:
-                ind = crimes.index(crime)
-                district = last_line[-3]
-                if district == 'SOUTWEST':
-                    district = "SOUTHWEST"
-                if district in districts:
-                    month = last_line[-2]
-                    print(district,month,str(ind))
-                    d[district][int(month) - 1]['stats'][ind] += 1
+            ind = crimes.index(crime)
+            district = last_line[-3]
+            if district == 'SOUTWEST':
+                district = "SOUTHWEST"
+            if district in districts:
+                month = last_line[-2]
+                #print(district,month,str(ind))
+                d[district][int(month) - 1]['stats'][ind] += 1
             line = file.readline()
     return d
 
@@ -58,5 +76,8 @@ def getInfo():
 # will return a dictionary with keys as districts and values as dictionaries
 # the keys of the nested dict will be months, and their values will be a list of #'s
 # if you need to change crimes, change the crimes at the start
+'''
 crimes = getInfo()
-print(crimes)
+with open("../data/crimeCount.csv","w") as file:
+    file.write(repr(crimes))
+'''
