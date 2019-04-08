@@ -16,7 +16,7 @@ def findCrimes():
 
 crimes = ['MV THEFT/AUTOMOBILE','MURDER AND NONNEGLIGENT MANSLAUGHTER','DISORDERLY/ VAGRANCY / BEGGING']
 crimes = findCrimes()
-print(crimes)
+#print(crimes)
 with open("../data/crimes.csv","w") as file:
     file.write(repr(crimes))
 def addMonth():
