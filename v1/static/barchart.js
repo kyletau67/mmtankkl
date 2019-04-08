@@ -51,9 +51,6 @@ for (var i = 0; i < 3; i++) {
     .append("g")
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  d3.select('#district').on('change', function() {
-    district = d3.select('#district').node().value
-
     checkBoxes();
   });
 

@@ -16,15 +16,7 @@ width: 25%;
   </head>
 
 <body>
-<p>Pick a district.</p>
-<select id="district">
-  <option value="SOUTHEAST">Southeast</option>
-  <option value="NORTHWEST">Northwest</option>
-  <option value="NORTH">North</option>
-  <option value="SOUTHWEST">Southwest</option>
-  <option value="NORTHEAST">Northeast</option>
-  <option value="DOWNTOWN">Downtown</option>
-</select>
+District: {{district}}
 
 <div class="container">
           <form role="form" class="categories">
@@ -35,6 +27,7 @@ width: 25%;
   </div>
   <script src="https://d3js.org/d3.v5.min.js" charset="utf-8"></script>
   <script src="https://d3js.org/d3-scale.v3.min.js"></script>
+  <script>var district = {{district}}</script>
   <script src="../static/barchart.js"></script>
 </body>
 
