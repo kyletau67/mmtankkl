@@ -9,7 +9,7 @@ for (var i = 0; i < 342; i++) {
     dict[crimes[i]] = ids[i];
 }
 console.log(dict)
-    
+
 
 for (var i = 0; i < 3; i++) {
     console.log(crimes.length)
@@ -39,7 +39,7 @@ for (var i = 0; i < 3; i++) {
 
 
   var color = d3.scaleOrdinal()
-      .range(["#98abc5", "#8a89a6", "#7b6888", "#6b486b", "#a05d56", "#d0743c", "#ff8c00"]);
+      .range(["#98abc5", "#8a89a6", "#7b6888"]);
 
   var xAxis = d3.axisBottom(x);
 
@@ -78,7 +78,7 @@ for (var i = 0; i < 3; i++) {
 
     y0.domain(data[district].map(function(d) { return d.month; }));
 
-    y1.domain(crimes).rangeRound([0, 20]);
+    y1.domain(crimes).rangeRound([0, y0.bandwidth()]);
 
 
     svg.append("g")
@@ -115,7 +115,7 @@ for (var i = 0; i < 3; i++) {
 
     y0.domain(monthsData.map(function(d) { return d.month; }));
 
-    y1.domain(ids).rangeRound([0, 20]);
+    y1.domain(selectedIds).rangeRound([0, y0.bandwidth()]);
 
     svg.selectAll('.axis.x').call(xAxis);
     svg.selectAll('.axis.y').call(yAxis);
@@ -134,25 +134,17 @@ for (var i = 0; i < 3; i++) {
 
 
     age.enter().append("rect")
-    .attr("x", 0)
-    .attr("y", function(d, index) { return y1(ids[index]); })
-    .attr("id", function(d) { return d.id; })
-    .style("fill", function(d) { return color(d.name); })
-    .text(function(d) { return d.name })
-    .transition()
-    .attr("width", function(d) { return x(d.value); })
-    .attr("height", 10);
-//console.log(age);
+      .attr('width', 0);
 
     age
       .attr("x", 0)
-      .attr("y", function(d, index) { return y1(ids[index]); })
+      .attr("y", function(d, index) { return y1(selectedIds[index]); })
       .attr("id", function(d) { return d.id; })
       .style("fill", function(d) { return color(d.name); })
       .text(function(d) { return d.name })
       .transition()
       .attr("width", function(d) { return x(d.value); })
-      .attr("height", 10);
+      .attr("height", y1.bandwidth());
 
     age.exit().transition().attr("width", 0).remove();
 
