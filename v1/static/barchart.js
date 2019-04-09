@@ -52,7 +52,6 @@ for (var i = 0; i < 3; i++) {
       .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
     checkBoxes();
-  });
 
   var onchange = function() {
       checkBoxes();
